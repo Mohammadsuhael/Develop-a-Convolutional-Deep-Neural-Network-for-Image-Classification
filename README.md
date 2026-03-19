@@ -36,12 +36,9 @@ class CNNClassifier(nn.Module):
         super(CNNClassifier, self).__init__()
         self.conv1=nn.Conv2d(in_channels=1,out_channels=32,kernel_size=3,padding=1)
         self.pool=nn.MaxPool2d(kernel_size=2,stride=2)
-        # conv2 should take 32 channels as input from conv1's output after pooling
         self.conv2=nn.Conv2d(in_channels=32,out_channels=64,kernel_size=3,padding=1)
-        # conv3 should take 64 channels as input from conv2's output after pooling
         self.conv3=nn.Conv2d(in_channels=64,out_channels=128,kernel_size=3,padding=1)
-        # Calculate input size for fc1: 128 channels * 3x3 feature map after 3 pooling layers
-        # (28 -> 14 -> 7 -> 3) based on kernel_size=2, stride=2
+
         self.fc1=nn.Linear(128*3*3,128)
         self.fc2=nn.Linear(128,64)
         self.fc3=nn.Linear(64,10)
